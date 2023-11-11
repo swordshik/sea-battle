@@ -386,19 +386,34 @@ linesplayer6 = linesplayer6*7
 fieldplayer = [linesplayer0, linesplayer1, linesplayer2, linesplayer3, linesplayer4, linesplayer5, linesplayer6]
 
 #choosing map
-field = random.randrange(0, 7)
-if field == 0:
-    field = map0
-if field == 1:
-    field = map0
-if field == 2:
-    field = map0
-if field == 3:
-    field = map0
-if field == 4:
-    field = map0
-if field == 5:
-    field = map0
+linesfield0 = [0]
+linesfield0 = linesfield0*7
+linesfield1 = [0]
+linesfield1 = linesfield1*7
+linesfield2 = [0]
+linesfield2 = linesfield2*7
+linesfield3 = [0]
+linesfield3 = linesfield3*7
+linesfield4 = [0]
+linesfield4 = linesfield4*7
+linesfield5 = [0]
+linesfield5 = linesfield5*7
+linesfield6 = [0]
+linesfield6 = linesfield6*7
+field = [linesfield0, linesfield1, linesfield2, linesfield3, linesfield4, linesfield5, linesfield6]
+rand = random.randrange(0, 7)
+if rand == 0:
+    field = map0(field)
+if rand == 1:
+    field = map1(field)
+if rand == 2:
+    field = map2(field)
+if rand == 3:
+    field = map3(field)
+if rand == 4:
+    field = map4(field)
+if rand == 5:
+    field = map5(field)
 clear(0)
 
 name = input("Enter your name:\n")
