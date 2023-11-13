@@ -17,6 +17,14 @@ moves = 0
 #Functions
 def exit():
     sys.exit()
+    
+def info():
+    clear(0)
+    print("# == hitted\nx == not any ship\no == not touched place")
+    print("Columns given in numbers.\nRows given in letters.\n")
+    print("Enter '0' to get back to menu")
+    if int(input()) == 0:
+        menu()
 
 def check(row, column, list):
     if list[row][column] == 1:
