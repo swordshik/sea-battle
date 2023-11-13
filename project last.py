@@ -4,28 +4,24 @@
 from os import system
 import time
 import random
+import sys
 
 # # == hitted
 # x == not any ship
 # o == not touched place
 
 #VARIABLES
-hitted = 0
 list_of_hitted = []
-moves = 0
+stat = []
 
 #Functions
-def statistics():
-    clear(0)
-    for i in range(len(stat)):
-        print(stat[i][0], "     ", print(stat[i][1]))
-    print("\nEnter '0' to get back to menu")
-    if int(input()) == 0:
-        menu()
-        
+def clear(x):
+    time.sleep(x)
+    system("cls")
+
 def exit():
     sys.exit()
-    
+
 def info():
     clear(0)
     print("# == hitted\nx == not any ship\no == not touched place")
@@ -40,9 +36,13 @@ def check(row, column, list):
     else:
         return 0
     
-def clear(x):
-    time.sleep(x)
-    system("cls")
+def statistics():
+    clear(0)
+    for i in range(len(stat)):
+        print(stat[i][0], "     ", print(stat[i][1]))
+    print("\nEnter '0' to get back to menu")
+    if int(input()) == 0:
+        menu()
 
 def change_for_hit(row, column, list):
     list[row][column] = "#"
@@ -113,7 +113,6 @@ def sunk(row, column, list):
         list[row][column-1] = "x"
     return list
 
-
 def not_sunk(row, column, list):
     #for inside
     if (row > 0 and row < 6) and (column > 0 and column < 6):
@@ -146,7 +145,6 @@ def not_sunk(row, column, list):
         list[row+1][column-1] = "x"
         list[row-1][column-1] = "x"
     return list
-
 
 
 def checknear(row, column, list):
@@ -318,6 +316,7 @@ def menu():
         sys.exit()
     else:
         menu()
+
 #game
 def game():
     #field to communicate with player
