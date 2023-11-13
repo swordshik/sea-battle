@@ -304,6 +304,22 @@ def map5(map5):
     map5[5][4] = 1
     return map5
 
+#menu
+def menu():
+    clear(0)
+    wh = int(input("1: Play\n2: Info\n3: Statistics\n4: Exit\n"))
+    if wh == 1:
+        game()
+    elif wh == 2:
+        info()
+    elif wh == 3:
+        statistics()
+    elif wh == 4:
+        sys.exit()
+    else:
+        menu()
+
+
 #field to communicate with player
 linesplayer0 = ["o"]
 linesplayer0 = linesplayer0*7
