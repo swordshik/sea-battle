@@ -15,6 +15,9 @@ list_of_hitted = []
 moves = 0
 
 #Functions
+def exit():
+    sys.exit()
+
 def check(row, column, list):
     if list[row][column] == 1:
         return 1
