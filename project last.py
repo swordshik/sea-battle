@@ -318,118 +318,137 @@ def menu():
         sys.exit()
     else:
         menu()
-
-
-#field to communicate with player
-linesplayer0 = ["o"]
-linesplayer0 = linesplayer0*7
-linesplayer1 = ["o"]
-linesplayer1 = linesplayer1*7
-linesplayer2 = ["o"]
-linesplayer2 = linesplayer2*7
-linesplayer3 = ["o"]
-linesplayer3 = linesplayer3*7
-linesplayer4 = ["o"]
-linesplayer4 = linesplayer4*7
-linesplayer5 = ["o"]
-linesplayer5 = linesplayer5*7
-linesplayer6 = ["o"]
-linesplayer6 = linesplayer6*7
-fieldplayer = [linesplayer0, linesplayer1, linesplayer2, linesplayer3, linesplayer4, linesplayer5, linesplayer6]
-
-#choosing map
-linesfield0 = [0]
-linesfield0 = linesfield0*7
-linesfield1 = [0]
-linesfield1 = linesfield1*7
-linesfield2 = [0]
-linesfield2 = linesfield2*7
-linesfield3 = [0]
-linesfield3 = linesfield3*7
-linesfield4 = [0]
-linesfield4 = linesfield4*7
-linesfield5 = [0]
-linesfield5 = linesfield5*7
-linesfield6 = [0]
-linesfield6 = linesfield6*7
-field = [linesfield0, linesfield1, linesfield2, linesfield3, linesfield4, linesfield5, linesfield6]
-rand = random.randrange(0, 7)
-if rand == 0:
-    field = map0(field)
-if rand == 1:
-    field = map1(field)
-if rand == 2:
-    field = map2(field)
-if rand == 3:
-    field = map3(field)
-if rand == 4:
-    field = map4(field)
-if rand == 5:
-    field = map5(field)
-clear(0)
-
-name = input("Enter your name:\n")
-clear(5)
-
 #game
-while hitted != 11:
-    for i in range(7):
-        print(*fieldplayer[i])
+def game():
+    #field to communicate with player
+    linesplayer0 = ["o"]
+    linesplayer0 = linesplayer0*7
+    linesplayer1 = ["o"]
+    linesplayer1 = linesplayer1*7
+    linesplayer2 = ["o"]
+    linesplayer2 = linesplayer2*7
+    linesplayer3 = ["o"]
+    linesplayer3 = linesplayer3*7
+    linesplayer4 = ["o"]
+    linesplayer4 = linesplayer4*7
+    linesplayer5 = ["o"]
+    linesplayer5 = linesplayer5*7
+    linesplayer6 = ["o"]
+    linesplayer6 = linesplayer6*7
+    fieldplayer = [linesplayer0, linesplayer1, linesplayer2, linesplayer3, linesplayer4, linesplayer5, linesplayer6]
 
-    column = int(input("Enter the column\n"))
-    column -= 1
+    #choosing map
+    linesfield0 = [0]
+    linesfield0 = linesfield0*7
+    linesfield1 = [0]
+    linesfield1 = linesfield1*7
+    linesfield2 = [0]
+    linesfield2 = linesfield2*7
+    linesfield3 = [0]
+    linesfield3 = linesfield3*7
+    linesfield4 = [0]
+    linesfield4 = linesfield4*7
+    linesfield5 = [0]
+    linesfield5 = linesfield5*7
+    linesfield6 = [0]
+    linesfield6 = linesfield6*7
+    field = [linesfield0, linesfield1, linesfield2, linesfield3, linesfield4, linesfield5, linesfield6]
 
-    row = input("Enter the row\n")
-    row = ord(row) - 97
-    moves += 1
-    small_list_of_hitted = [row, column]
+    rand = random.randrange(0, 7)
+    if rand == 0:
+        field = map0(field)
+    if rand == 1:
+        field = map1(field)
+    if rand == 2:
+        field = map2(field)
+    if rand == 3:
+        field = map3(field)
+    if rand == 4:
+        field = map4(field)
+    if rand == 5:
+        field = map5(field)
+    hitted = 0 
+    moves = 0
     clear(0)
-
-    if (small_list_of_hitted in list_of_hitted):
-        print("You've already shooted here.")
     
-    elif row>6 or column>6:
-        print("You shooted out of map.")
+    name = input("Enter your name:\n")
+    clear(3)
 
-    else:
-        list_of_hitted.append(small_list_of_hitted)
-
-        #when player did not hit
-        if check(row, column, field) == 0:
-            clear(0)
+    while hitted != 11:
+        print("Enter '0' to get back to menu")
+        for i in range(7):
+            print(*fieldplayer[i])
+        #choosing column
+        column = int(input("Enter the column\n"))
+        column -= 1
         
-            print("You did not hit")
-            clear(3)
-
-            fieldplayer = change_for_not_hit(row, column, fieldplayer)
-    
-        #when player hitted
-        if check(row, column, field) == 1:
+        if column == -1:
+            menu()
         
-            hitted += 1
-            field = change_for_hit_for_game(row, column, field)
+        #choosing row
+        row = input("Enter the row\n")
+        
+        if row == "0":
+            menu()
+        
+        # turning row into integer
+        row = ord(row) - 97
 
-            fieldplayer = change_for_hit(row, column, fieldplayer)
+        #add 1 to moves
+        moves += 1
+        small_list_of_hitted = [row, column]
+        clear(0)
 
+        if (small_list_of_hitted in list_of_hitted):
+            print("You've already shooted here.")
+        
+        elif row>6 or column>6:
+            print("You shooted out of map.")
 
-            #for sunk
-            if checknear(row, column, field) == 0:
+        else:
+            list_of_hitted.append(small_list_of_hitted)
+
+            #when player did not hit
+            if check(row, column, field) == 0:
                 clear(0)
             
-                print("Hit and sunk")
+                print("You did not hit")
                 clear(3)
 
-                fieldplayer = sunk(row, column, fieldplayer)
-
+                fieldplayer = change_for_not_hit(row, column, fieldplayer)
         
-            #for not sunk
-            if checknear(row, column, field) == 1:
-                clear(0)
+            #when player hitted
+            if check(row, column, field) == 1:
             
-                print("Hitted")
-                clear(3)
+                hitted += 1
+                field = change_for_hit_for_game(row, column, field)
 
-                fieldplayer = not_sunk(row, column, fieldplayer)
+                fieldplayer = change_for_hit(row, column, fieldplayer)
 
-print("Congratulations, you won the game!")
-print("Player:", name, "\nMoves:", moves)
+                #for sunk
+                if checknear(row, column, field) == 0:
+                    clear(0)
+                
+                    print("Hit and sunk")
+                    clear(3)
+
+                    fieldplayer = sunk(row, column, fieldplayer)
+
+                #for not sunk
+                if checknear(row, column, field) == 1:
+                    clear(0)
+                
+                    print("Hitted")
+                    clear(3)
+
+                    fieldplayer = not_sunk(row, column, fieldplayer)
+
+    print("Congratulations, you won the game!")
+    print("Player:", name, "\nMoves:", moves)
+    l = [name, moves]
+    stat.append(l)
+    print("Enter '0' to get back to menu")
+    if int(input()) == 0:
+        menu()
+
+menu()
