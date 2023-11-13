@@ -15,6 +15,14 @@ list_of_hitted = []
 moves = 0
 
 #Functions
+def statistics():
+    clear(0)
+    for i in range(len(stat)):
+        print(stat[i][0], "     ", print(stat[i][1]))
+    print("\nEnter '0' to get back to menu")
+    if int(input()) == 0:
+        menu()
+        
 def exit():
     sys.exit()
     
